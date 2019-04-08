@@ -10,7 +10,7 @@ def modinv(a,b=Pcurve): #Extended Euclidean Algorithm/'division' in elliptic cur
     lm, hm = 1,0
     low, high = a%b,b
     while low > 1:
-        ratio = high/low
+        ratio = high//low
         nm, new = hm-lm*ratio, high-low*ratio
         lm, low, hm, high = nm, new, lm, low
     return lm % b
@@ -38,12 +38,12 @@ def ECMultiply(GenPoint,privKeyHex): #Double & add. Not true multiplication
     return (Q)
 
 PublicKey = ECMultiply(GPoint,privKey)
-print "Private Key:";
-print privKey; print
-print "Public Key public key (uncompressed):";
-print PublicKey; print
-print "Public Key (compressed):";
+print("Private Key:")
+print(privKey)
+print("Public Key public key (uncompressed):")
+print(PublicKey)
+print("Public Key (compressed):")
 if PublicKey[1] % 2 == 1: # If the Y coordinate of the Public Key is odd.
-    print "03"+str(hex(PublicKey[0])[2:-1]).zfill(64)
+    print("03" + str(hex(PublicKey[0])[2:]).zfill(64))
 else: # If the Y coordinate is even.
-    print "02"+str(hex(PublicKey[0])[2:-1]).zfill(64)
+    print("02" + str(hex(PublicKey[0])[2:]).zfill(64))
